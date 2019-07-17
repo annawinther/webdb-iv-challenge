@@ -10,7 +10,12 @@ function findById(id){
 }
 
 function findSteps(id){
-    return db('steps').where({ id });
+        // return db('steps')
+        //     .where({ scheme_id: id });
+    return db('schemes')
+        .innerJoin('steps', 'schemes.id', 'steps.scheme_id')
+        .where({ scheme_id: id })
+        .orderBy('steps.step_number', "asc");
 }
 
 function add({ scheme_name }) {
