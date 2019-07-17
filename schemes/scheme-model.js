@@ -14,7 +14,8 @@ function findSteps(id){
         //     .where({ scheme_id: id });
     return db('schemes')
         .innerJoin('steps', 'schemes.id', 'steps.scheme_id')
-        .where({ scheme_id: id })
+        .where({ scheme_id: id})
+        .select('steps.id', 'scheme_name','step_number', 'instructions' )
         .orderBy('steps.step_number', "asc");
 }
 
