@@ -17,8 +17,8 @@ function add({ scheme_name }) {
     return db('schemes').insert({ scheme_name });
 }
 
-function update(id, { scheme_name }) {
-    return db('schemes').where({ id }).update({ scheme_name });
+function update(scheme_name, id ) {
+    return db('schemes').where({ id }).update(scheme_name);
 }
 
 function remove(id){
