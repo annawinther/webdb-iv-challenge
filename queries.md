@@ -33,10 +33,10 @@ ORDER BY p.productName;
 SELECT 
     o.OrderID,
     c.customername,
-    e.Lastname
+    e.Lastname AS employees_lastname
 FROM Orders AS o
-JOIN Customers AS c ON o.CustomerID = c.customerID
-JOIN Employees AS e ON o.EmployeeID = e.EmployeeID;
+JOIN Customers AS c ON o.CustomerID = c.customerID,
+Employees AS e ON o.EmployeeID = e.EmployeeID;
 
 ### (Stretch)  Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 9 records.
 

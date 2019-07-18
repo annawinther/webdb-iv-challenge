@@ -20,15 +20,31 @@ function findSteps(id){
 }
 
 function add({ scheme_name }) {
-    return db('schemes').insert({ scheme_name });
+    return db('schemes')
+        .insert({ scheme_name })
+        .then(([id]) => this.findById(id));
 }
 
-function update(scheme_name, id) {
-    return db('schemes').where({ id }).update(scheme_name);
+function update(changes, id) {
+    return db('schemes')
+    .where({ id })
+    .update(changes)
+    ,then(count => (count > 0 ? this.findById(id) : null));
 }
 
 function remove(id){
-    return db('schemes').where({ id }).del();
+    const scheme = null;
+    return this.findById(id)
+        .then(data => {
+            if(!data) {
+                return 0;
+            }
+            scheme = data;
+            return db('schemes')
+            .where({ id })
+            .del();
+        })
+        .then(count => (count > 0 ? scheme : null))
 }
 
 module.exports = {
